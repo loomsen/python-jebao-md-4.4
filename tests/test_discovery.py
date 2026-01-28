@@ -3,6 +3,7 @@
 from unittest.mock import MagicMock, patch
 
 import pytest
+
 from jebao.discovery import JebaoDeviceInfo, JebaoDiscovery, discover_jebao_devices
 
 
