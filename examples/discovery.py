@@ -3,7 +3,7 @@
 import asyncio
 import logging
 
-from jebao import discover_jebao_devices
+from jebao_md44 import discover_jebao_devices
 
 # Enable debug logging to see discovery process
 logging.basicConfig(level=logging.INFO)

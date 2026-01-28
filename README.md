@@ -22,7 +22,7 @@ It implements the TCP protocol for communication with the device, allowing you t
 
 **With pip:**
 ```bash
-pip install jebao
+pip install jebao-md44
 ```
 
 **With uv (recommended for development):**
@@ -60,7 +60,7 @@ Or to programmatically discover Jebao devices on your local network using UDP br
 
 ```python
 import asyncio
-from jebao import discover_jebao_devices
+from jebao_md44 import discover_jebao_devices
 
 async def main():
     # Discover devices (waits 5 seconds for responses)
@@ -78,7 +78,7 @@ asyncio.run(main())
 For more control over the discovery process:
 
 ```python
-from jebao import JebaoDiscovery
+from jebao_md44 import JebaoDiscovery
 
 async def main():
     discovery = JebaoDiscovery(
@@ -128,7 +128,7 @@ asyncio.run(main())
 
 ```python
 import asyncio
-from jebao import JebaoDevice
+from jebao_md44 import JebaoDevice
 
 async def main():
     async with JebaoDevice(ip="192.168.1.100") as device:

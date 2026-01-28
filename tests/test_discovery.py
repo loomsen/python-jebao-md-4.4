@@ -4,7 +4,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from jebao.discovery import JebaoDeviceInfo, JebaoDiscovery, discover_jebao_devices
+from jebao_md44.discovery import JebaoDeviceInfo, JebaoDiscovery, discover_jebao_devices
 
 
 @pytest.mark.asyncio

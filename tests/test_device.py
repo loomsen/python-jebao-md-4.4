@@ -4,7 +4,7 @@ from unittest.mock import AsyncMock, MagicMock, patch
 
 import pytest
 
-from jebao import JebaoAction, JebaoDevice
+from jebao_md44 import JebaoAction, JebaoDevice
 
 
 @pytest.fixture

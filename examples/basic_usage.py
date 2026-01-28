@@ -3,7 +3,7 @@
 import asyncio
 import logging
 
-from jebao import JebaoDevice
+from jebao_md44 import JebaoDevice
 
 # Configure logging to see what's happening
 logging.basicConfig(
