@@ -1,6 +1,6 @@
 """Jebao dosing pump Python library.
 
-A Python library for controlling Jebao PH803W dosing pumps via TCP/IP.
+A Python library for controlling Jebao MD-4.4 dosing pumps via TCP/IP.
 """
 
 from jebao_md44.device import JebaoAction, JebaoDevice

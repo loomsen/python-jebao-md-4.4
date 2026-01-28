@@ -1,6 +1,6 @@
 """Jebao dosing pump device control via TCP.
 
-This module provides functionality to control PH803W dosing pumps.
+This module provides functionality to control MD-4.4 dosing pumps.
 """
 
 import asyncio
@@ -31,7 +31,7 @@ class JebaoAction(Enum):
 
 
 class JebaoDevice:
-    """Control Jebao PH803W dosing pump via TCP."""
+    """Control Jebao MD-4.4 dosing pump via TCP."""
 
     TCP_PORT = 12416
     PASSCODE_REQUEST = bytes.fromhex("0000000303000006")

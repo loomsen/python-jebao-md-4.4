@@ -2,7 +2,7 @@
 
 ## 🎉 Initial Release
 
-We're excited to announce the first official release of the **Jebao Python Library** - a modern, async Python library for controlling Jebao PH803W dosing pumps via TCP/IP!
+We're excited to announce the first official release of the **Jebao Python Library** - a modern, async Python library for controlling Jebao MD 4.4 dosing pumps via TCP/IP!
 
 This library fills a gap in the Python ecosystem by providing a native implementation for Jebao pump control (previously only Node.js implementations existed).
 
@@ -52,7 +52,7 @@ async def main():
     async with JebaoDevice(ip="192.168.1.100") as device:
         # Retrieve device data
         data = await device.retrieve_data()
-        
+
         # Start pump 1 for 2 seconds
         await device.start_pump(1)
         await asyncio.sleep(2)
@@ -93,7 +93,6 @@ All 35 tests passing ✅
 
 This project is heavily inspired by and builds upon the excellent work from:
 - [tancou/jebao-dosing-pump-md-4.4](https://github.com/tancou/jebao-dosing-pump-md-4.4) - Original protocol reverse engineering
-- [baloise-incubator/Jebao-Doser](https://github.com/baloise-incubator/Jebao-Doser) - Node.js reference implementation
 
 ## 📝 Notes
 

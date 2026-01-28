@@ -298,7 +298,7 @@ This library implements the Jebao TCP protocol:
 
 ## Supported Devices
 
-- Jebao PH803W WiFi Dosing Pump
+- Jebao MD-4.4 WiFi Dosing Pump
 
 Other Jebao WiFi-enabled dosing pumps may work but have not been tested.
 

@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "jebao-md44"
 version = "0.1.0"
-description = "Python library for controlling Jebao PH803W dosing pumps via TCP/IP"
+description = "Python library for controlling Jebao MD-4.4 dosing pumps via TCP/IP"
 readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}

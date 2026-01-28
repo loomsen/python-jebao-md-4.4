@@ -1,6 +1,6 @@
 """Jebao dosing pump discovery via UDP broadcast.
 
-This module provides functionality to discover PH803W devices in the local network.
+This module provides functionality to discover MD-4.4 devices in the local network.
 """
 
 import asyncio
@@ -25,7 +25,7 @@ class JebaoDeviceInfo:
 
 
 class JebaoDiscovery:
-    """Discover Jebao PH803W devices via UDP broadcast."""
+    """Discover Jebao MD-4.4 devices via UDP broadcast."""
 
     UDP_PORT = 12414
     PROBE_MESSAGE = bytes.fromhex("0000000303000003")
