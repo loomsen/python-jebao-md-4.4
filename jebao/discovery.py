@@ -4,11 +4,9 @@ This module provides functionality to discover PH803W devices in the local netwo
 """
 
 import asyncio
-import json
 import logging
 import socket
 from dataclasses import dataclass
-from typing import Optional
 
 log = logging.getLogger(__name__)
 
@@ -41,7 +39,7 @@ class JebaoDiscovery:
         """
         self.listen_address = listen_address
         self.timeout = timeout
-        self.transport: Optional[asyncio.DatagramTransport] = None
+        self.transport: asyncio.DatagramTransport | None = None
 
     async def discover(self) -> list[JebaoDeviceInfo]:
         """Discover Jebao devices on the network.
@@ -56,21 +54,21 @@ class JebaoDiscovery:
         loop = asyncio.get_event_loop()
 
         class DiscoveryProtocol(asyncio.DatagramProtocol):
-            def __init__(self, parent):
+            def __init__(self, parent: "JebaoDiscovery") -> None:
                 self.parent = parent
                 self.devices = devices
                 self.seen_devices = seen_devices
 
-            def connection_made(self, transport):
+            def connection_made(self, transport: asyncio.DatagramTransport) -> None:  # type: ignore[override]
                 self.transport = transport
                 sock = transport.get_extra_info("socket")
                 sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
-                log.debug(f"Sending UDP broadcast probe message")
+                log.debug("Sending UDP broadcast probe message")
                 transport.sendto(
                     self.parent.PROBE_MESSAGE, ("255.255.255.255", self.parent.UDP_PORT)
                 )
 
-            def datagram_received(self, data, addr):
+            def datagram_received(self, data: bytes, addr: tuple[str, int]) -> None:  # type: ignore[override]
                 log.debug(f"Received {len(data)} bytes from {addr}: {data.hex()}")
                 try:
                     device_info = self._parse_response(data, addr)
@@ -89,7 +87,7 @@ class JebaoDiscovery:
                 except Exception as e:
                     log.error(f"Error parsing discovery response from {addr}: {e}")
 
-            def _parse_response(self, data: bytes, addr) -> Optional[JebaoDeviceInfo]:
+            def _parse_response(self, data: bytes, addr: tuple[str, int]) -> JebaoDeviceInfo | None:
                 """Parse device discovery response."""
                 if len(data) < 8:
                     return None
@@ -151,7 +149,7 @@ class JebaoDiscovery:
                                 s = remaining[current_pos:].decode("ascii")
                                 if s:
                                     strings.append(s)
-                            except:
+                            except UnicodeDecodeError:
                                 pass
                             break
 
@@ -160,7 +158,7 @@ class JebaoDiscovery:
                             s = remaining[current_pos:null_pos].decode("ascii")
                             if s:  # Non-empty string
                                 strings.append(s)
-                        except:
+                        except UnicodeDecodeError:
                             pass
 
                         current_pos = null_pos + 1

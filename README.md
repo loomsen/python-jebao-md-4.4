@@ -20,16 +20,16 @@ It implements the TCP protocol for communication with the device, allowing you t
 
 ## Installation
 
+**With pip:**
 ```bash
 pip install jebao
 ```
 
-Or install from source:
-
+**With uv (recommended for development):**
 ```bash
 git clone https://github.com/loomsen/python-jebao-md-4.4.git
 cd python-jebao-md-4.4
-pip install -e .
+uv sync --group dev
 ```
 
 
@@ -342,20 +342,31 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ### Setup Development Environment
 
+This project uses [uv](https://docs.astral.sh/uv/) for dependency management.
+
 ```bash
 # Clone the repository
 git clone https://github.com/loomsen/python-jebao-md-4.4.git
 cd python-jebao-md-4.4
 
-# Install development dependencies
-pip install -e ".[dev]"
+# Sync dependencies (creates .venv and installs all dependencies)
+uv sync --group dev
 
 # Run tests
-pytest
+uv run pytest
 
-# Run linters
+# Run tests with coverage
+uv run pytest --cov=jebao --cov-report=term --cov-report=html
+
+# Run formatters and linters
+uv run black .
+uv run ruff check .
+uv run mypy jebao
+
+# Or activate the virtual environment
+source .venv/bin/activate
+pytest
 black .
-mypy jebao
 ruff check .
 ```
 

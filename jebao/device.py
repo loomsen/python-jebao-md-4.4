@@ -6,7 +6,6 @@ This module provides functionality to control PH803W dosing pumps.
 import asyncio
 import logging
 from enum import Enum
-from typing import Optional
 
 log = logging.getLogger(__name__)
 
@@ -56,11 +55,11 @@ class JebaoDevice:
         self.auto_reconnect = auto_reconnect
         self.ping_interval = ping_interval
 
-        self.reader: Optional[asyncio.StreamReader] = None
-        self.writer: Optional[asyncio.StreamWriter] = None
-        self.passcode: Optional[bytes] = None
+        self.reader: asyncio.StreamReader | None = None
+        self.writer: asyncio.StreamWriter | None = None
+        self.passcode: bytes | None = None
         self.connected = False
-        self.ping_task: Optional[asyncio.Task] = None
+        self.ping_task: asyncio.Task | None = None
         self.read_lock = asyncio.Lock()
 
     async def connect(self) -> bool:
@@ -139,7 +138,7 @@ class JebaoDevice:
             log.error(f"Login failed: {e}")
             return False
 
-    async def retrieve_data(self) -> Optional[dict]:
+    async def retrieve_data(self) -> dict | None:
         """Retrieve device data (sensor readings, pump status, etc.).
 
         This method must be called before sending pump commands to initialize
@@ -262,7 +261,7 @@ class JebaoDevice:
                 log.warning(f"Response too short: {len(response)} bytes")
             return True
 
-        except asyncio.TimeoutError:
+        except TimeoutError:
             log.warning("Action acknowledgment timeout, but action may have succeeded")
             return True
         except (ConnectionError, BrokenPipeError, OSError) as e:
@@ -384,7 +383,7 @@ class JebaoDevice:
                     else:
                         log.warning("Invalid pong response")
 
-                except asyncio.TimeoutError:
+                except TimeoutError:
                     log.warning("Ping timeout")
                 except Exception as e:
                     log.error(f"Ping error: {e}")
@@ -433,6 +432,11 @@ class JebaoDevice:
         await self.login()
         return self
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
+    async def __aexit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc_val: BaseException | None,
+        exc_tb: object | None,
+    ) -> None:
         """Async context manager exit."""
         await self.disconnect()
