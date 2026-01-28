@@ -388,7 +388,7 @@ This project is heavily inspired by and builds upon the excellent work from:
 ## Author
 
 **Norbert Varzariu**
-- Email: loomsen@gmail.com
+- Email: loomsen < at > gmail.com
 - GitHub: [@loomsen](https://github.com/loomsen)
 
 ## Support
